@@ -14,18 +14,20 @@ class Product(models.Model):
 
     def __str__(self):
         '''строковое отображение обьекта'''
-        return self.name, self.category, self.price
+        return f'{self.name}, {self.category}, {self.price}'
 
     class Meta:
         #ordering = ('name')
-        pass
+        verbose_name = 'Продукт'  # для наименования одного объекта
+        verbose_name_plural = 'Продукты'  # для наименования набора объектов
 
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
-    created_at = models.CharField(max_length=10, verbose_name='Новое поле')
+    #created_at = models.CharField(max_length=10, verbose_name='Новое поле')
+
     def __str__(self):
-        return self.name, self.description
+        return f'{self.name}, {self.description}'
 
     class Meta:
         verbose_name = 'категория'  #для наименования одного объекта
