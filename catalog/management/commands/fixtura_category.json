@@ -1,0 +1,26 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Полуфабрикаты",
+      "description": "Замороженные продукты"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Молочные продукты",
+      "description": "молоко, сыры, сметана, йогурты, творог"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Мясные продукты",
+      "description": "свинина, говядина, баранина, курятина, индейка, крольчатина"
+    }
+  }
+]

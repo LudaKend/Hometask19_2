@@ -1,0 +1,67 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "молоко",
+      "description": "молоко Главснабпродукт",
+      "product_image": "static/images/Снимок_экрана_429.png",
+      "category": 2,
+      "price": 120.0,
+      "data_create": "2023-11-16",
+      "data_change": "2023-11-16"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "сметана",
+      "description": "сметана 20%",
+      "product_image": "static/images/Снимок_экрана_429_h2SdX6w.png",
+      "category": 2,
+      "price": 192.0,
+      "data_create": "2023-11-16",
+      "data_change": "2023-11-16"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "антрекот",
+      "description": "антрекот из телятины",
+      "product_image": "static/images/Снимок_экрана_429_fHSXIo2.png",
+      "category": 3,
+      "price": 907.0,
+      "data_create": "2023-11-16",
+      "data_change": "2023-11-16"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "пельмени домашние",
+      "description": "пельмени домашние ручной лепки",
+      "product_image": "static/images/Снимок_экрана_429_xY8GJPG.png",
+      "category": 1,
+      "price": 590.0,
+      "data_create": "2023-11-16",
+      "data_change": "2023-11-16"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "филе минтая",
+      "description": "филе минтая сахалинское",
+      "product_image": "static/images/Снимок_экрана_429_xY8GJPG.png",
+      "category": 1,
+      "price": 677,
+      "data_create": "2023-11-17",
+      "data_change": "2023-11-17"
+    }
+  }
+]
