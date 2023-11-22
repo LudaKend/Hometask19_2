@@ -3,7 +3,11 @@ from catalog.models import Product
 
 # Create your views here.
 def index_home_page(requests):
-    return render(requests, 'home_page.html')
+    products_list = Product.objects.all()
+    context = {
+        'objects_list': products_list
+    }
+    return render(requests, 'home_page.html', context)
 
 def index_contacts(requests):
     if requests.method == 'POST':
@@ -18,6 +22,7 @@ def index_contacts(requests):
 def index_catalog(requests):
     products_list = Product.objects.all()
     context = {
-        'object_list': products_list
+        'objects_list': products_list
     }
     return render(requests, 'catalog.html', context)
+

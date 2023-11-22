@@ -22,12 +22,14 @@
     <p class="lead">***************************************</p>
 </div>
 
+
 <div class="container">
+    {% for object in objects_list %}
     <div class="row text-center">
         <div class="col-3">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
+                    <h4 class="my-0 font-weight-normal">{{object | truncatechars:100}}</h4>
                 </div>
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title">$ 140</h1>
@@ -42,6 +44,8 @@
             </div>
         </div>
     </div>
+    {% endfor %}
+
 
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">

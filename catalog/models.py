@@ -16,7 +16,7 @@ class Product(models.Model):
 
     def __str__(self):
         '''строковое отображение обьекта'''
-        return f'{self.name}, {self.category}, {self.price}'
+        return f'{self.name}, {self.description}, {self.price}'
 
     class Meta:
         #ordering = ('name')
