@@ -1,4 +1,3 @@
-from django.db import models
 from django.db import connection
 from django.db import models
 
@@ -9,7 +8,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание', **NULLABLE)
     # здесь картинки товаров, а не то,что пользователь загрузил, поэтому путь такой указала...
-    product_image = models.ImageField(upload_to='static/images/', **NULLABLE, verbose_name='Изображение')
+    product_image = models.ImageField(upload_to='images/', **NULLABLE, verbose_name='Изображение')
     category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='Категория')
     price = models.FloatField(verbose_name='Цена', default=0)
     data_create = models.DateField(verbose_name='дата создания', auto_now_add=True)
@@ -17,7 +16,7 @@ class Product(models.Model):
 
     def __str__(self):
         '''строковое отображение обьекта'''
-        return f'{self.name}, {self.category}, {self.price}'
+        return f'{self.name}, {self.description}, {self.price}'
 
     class Meta:
         #ordering = ('name')

@@ -1,10 +1,19 @@
 from django.shortcuts import render
+from catalog.models import Product
 
 # Create your views here.
 def index_home_page(requests):
-    return render(requests, 'home_page.html')
+    products_list = Product.objects.all()
+    context = {
+        'objects_list': products_list,
+        'name_page': 'Главная'
+    }
+    return render(requests, 'home_page.html', context)
 
 def index_contacts(requests):
+    context = {
+        'name_page': 'Контакты'
+    }
     if requests.method == 'POST':
         name = requests.POST.get('name')
         phone = requests.POST.get('phone')
@@ -12,4 +21,13 @@ def index_contacts(requests):
 
         print(requests)
         print(f"Имя: {name}\nНомер телефона: {phone}\nСообщение:{message}")
-    return render(requests, 'contacts.html')
+    return render(requests, 'contacts.html', context)
+
+def index_catalog(requests):
+    products_list = Product.objects.all()
+    context = {
+        'objects_list': products_list,
+        'name_page': 'Каталог'
+    }
+    return render(requests, 'catalog.html', context)
+
