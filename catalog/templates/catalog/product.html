@@ -1,4 +1,5 @@
 {% extends 'catalog/base.html' %}
+{% load templatetags %}
 {% block content %}
 {% load static %}
 
@@ -32,8 +33,8 @@
              <div class="card mb-4 box-shadow">
                  <div class="card-body">
                     <div class="col-lg-6 col-md-6 col-sm-12">
-
-                        <img src="/media/{{ object.product_image }}" height="300" alt="Фото товара отсутствует">
+                        <img src="{% full_path object.product_image %}" height="300" />
+                        {#<img src="/media/{{ object.product_image }}" height="300" alt="Фото товара отсутствует">#}
                     </div>
                 </div>
              </div>
