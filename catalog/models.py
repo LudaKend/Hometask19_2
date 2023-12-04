@@ -2,7 +2,7 @@ from django.db import connection
 from django.db import models
 
 # Create your models here.
-NULLABLE = {'null':True, 'blank':True}
+NULLABLE = {'null': True, 'blank': True}
 
 class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
@@ -47,3 +47,5 @@ class Category(models.Model):
     def truncate_table_restart_id(cls):
         with connection.cursor() as cursor:
             cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table} RESTART IDENTITY CASCADE')
+
+

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from catalog.models import Product
+from django.views.generic import ListView, DetailView
 
 
 # Create your views here.
@@ -10,6 +11,12 @@ def index_home_page(requests):
         'name_page': 'Главная'
     }
     return render(requests, 'catalog/home_page.html', context)
+
+class CatalogListView(ListView):
+    model = Product
+    #template_name = 'catalog/home_page.html'
+    #template_name = 'catalog/product_list.html'
+
 
 def index_contacts(requests):
     context = {
@@ -41,3 +48,9 @@ def index_product(requests, pk):
         'name_page': 'Карточка продукта'
     }
     return render(requests, 'catalog/product.html', context)
+
+class CatalogDetailView(DetailView):
+    model = Product
+    #template_name = 'catalog/product.html'
+
+
