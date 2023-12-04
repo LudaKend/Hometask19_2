@@ -27,9 +27,10 @@ app_name = CatalogConfig.name
 
 # стало на CBV
 urlpatterns = [
-    path('', CatalogListView.as_view(), name='route_home_page'),
+    path('', index_home_page, name='route_home_page'),
+    path('catalog/', CatalogListView.as_view(), name='route_product_list'),
     path('contacts/', index_contacts, name='route_contacts'),
-    path('catalog/', index_catalog, name='route_catalog'),
+    #path('catalog/', index_catalog, name='route_catalog'),
     path('view/<int:pk>/', CatalogDetailView.as_view(), name='route_product'),
     #path('object/<int:pk>/', CatalogDetailView.as_view(), name='route_product'),
     #path('object/<int:pk>/', index_product, name='route_product'),

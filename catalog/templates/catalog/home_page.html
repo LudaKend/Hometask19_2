@@ -6,16 +6,18 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">Интернет-магазин </h5>
     <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="/contacts/">Блог</a>
-        <a class="p-2 btn btn-outline-primary" href="/catalog/">Каталог</a>
-        <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
-
+        {#<a class="p-2 btn btn-outline-primary" href="/catalog/">Каталог</a>#}
+        {#<a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>#}
+        {#<a class="p-2 btn btn-outline-primary" href="blog/"> Блог </a>#}
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_product_list' %}">Каталог</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_contacts' %}">Контакты</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'blog:route_blog_post_list' %}">Блог</a>
     </nav>
 </div>
 
 {% include 'catalog/include/inc_shop_name.html' %}
 
-<div class="container">
+<!--<div class="container">
     {% for object in objects_list %}
     <div class="row text-center">
         <div class="col-8">
@@ -33,16 +35,17 @@
                             <img src="{% full_path object.product_image %}" height="300" />
                         </div>
                     </ul>
-                    <!--<button type="button" class="btn btn-lg btn-block btn-outline-primary" href="/contacts/">Купить</button>-->
-                    <!--<a class="p-2 btn btn-outline-primary" href="/catalog/">Купить</a>-->
-                    {#<a href="{% url 'catalog:route_catalog' %}" class="p-2 btn btn-outline-primary">Купить</a>#}
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" href="/contacts/">Купить</button>
+                    <a class="p-2 btn btn-outline-primary" href="/catalog/">Купить</a>
+
                     <a href="{% url 'catalog:route_product' object.pk %}" class="p-2 btn btn-outline-danger">Купить</a>
                 </div>
             </div>
         </div>
     </div>
 
+
     {% endfor %}
-</div>
+</div>-->
 </body>
 {% endblock %}

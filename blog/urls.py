@@ -19,7 +19,7 @@ app_name = BlogConfig.name
 # пишем на CBV для приложение blog
 urlpatterns = [
     path('create/', BlogCreateView.as_view(), name='create'),
-    path('', BlogListView.as_view(), name='list'),
+    path('', BlogListView.as_view(), name='route_blog_post_list'),
     path('view/<int:pk>/', BlogDeleteView.as_view(), name='view'),
     path('edit/<int:pk>/', BlogUpdateView.as_view(), name='edit'),
     path('delete/<int:pk>/', BlogDeleteView.as_view(), name='delete'),

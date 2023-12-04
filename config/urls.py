@@ -34,7 +34,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('catalog.urls', namespace='catalog')),
-    path('blog_page', include('blog.urls', namespace='blog')),
+    path('blog/', include('blog.urls', namespace='blog')),
     #path('contacts', include('catalog.urls', namespace='catalog')),
     # path('catalog', include('catalog.urls', namespace='catalog')),
  ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
