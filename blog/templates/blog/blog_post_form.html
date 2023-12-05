@@ -1,0 +1,46 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+{% load static %}
+
+<body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Интернет-магазин </h5>
+    <nav class="ms-5">
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_home_page' %}">Главная</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_product_list' %}">Каталог</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_contacts' %}">Контакты</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'blog:route_blog_post_list' %}">Блог</a>
+    </nav>
+</div>
+{% include 'catalog/include/inc_shop_name.html' %}
+<div class="container">
+    <div class="row text-center">
+        <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="head">Заголовок</label>
+                <input type="text" name="head" class="form-control" id="head" placeholder="Введите заголовок" required>
+            </div>
+            <div class="mb-3">
+                <label for="slug">Слаг</label>
+                <input type="text" name="slug" class="form-control" id="slug" placeholder="Введите слаг" required>
+            </div>
+            <div class="mb-3">
+                <label for="content">Текст поста</label>
+                <textarea type="text" name="content" class="form-control" id="content" placeholder="Введите текст" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="preview">Превью</label>
+                <textarea type="text" name="preview" class="form-control" id="preview" placeholder="Добавьте превью" required></textarea>
+            </div>
+            <a href="{% url 'blog:route_blog_post_list' %}" class="p-2 btn btn-outline-danger">Сохранить</a>
+            {#<input type="submit" value="СОХРАНИТЬ" href="{% url 'blog:route_blog_post_view' %}">#}
+        </form>
+        </div>
+    </div>
+</div>
+
+</body>
+
+{% endblock %}

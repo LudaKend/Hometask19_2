@@ -9,7 +9,7 @@ class BlogCreateView(CreateView):
     model = Blog_post
     fields = ('head', 'slug', 'content', 'preview',)
 
-    success_url = reverse_lazy('blog:list')
+    success_url = reverse_lazy('blog:route_blog_post_list')
 
 class BlogListView(ListView):
     model = Blog_post
@@ -21,10 +21,10 @@ class BlogUpdateView(UpdateView):
     model = Blog_post
     fields = ('head', 'slug', 'content', 'preview', 'is_published',)
 
-    success_url = reverse_lazy('blog:list')
+    success_url = reverse_lazy('blog:route_blog_post_list')
 
 class BlogDeleteView(DetailView):
     model = Blog_post
 
-    success_url = reverse_lazy('blog:list')
+    success_url = reverse_lazy('blog:route_blog_post_list')
 
