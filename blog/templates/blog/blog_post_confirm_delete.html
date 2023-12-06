@@ -15,6 +15,11 @@
 {% include 'catalog/include/inc_shop_name.html' %}
 <div class="container">
     <div class="row text-center">
+        <form method="post">
+            {% csrf_token %}
+        <div class="card-title">
+            <h2 class="my-0 ">Вы хотите удалить данный пост? </h2>
+        </div>
         <div class="card-body">
             <div class="mb-3">
                 <label for="head">Заголовок</label>
@@ -32,14 +37,13 @@
                 <label for="preview">Превью</label>
                 <h4 class="my-0 font-weight-normal">{{ object.preview }}</h4>
             </div>
-            <a href="{% url 'blog:route_blog_post_list' %}" class="p-2 btn btn-outline-danger">Подтвердить</a>
+            <button type="submit" class="p-2 btn btn-outline-danger">Подтвердить</button>
+            {#<a href="{% url 'blog:route_blog_post_list' %}" class="p-2 btn btn-outline-danger">Подтвердить</a>#}
             <a href="{% url 'blog:route_blog_post_list' %}" class="p-2 btn btn-outline-primary">Отмена</a>
-
         </form>
         </div>
     </div>
 </div>
-
 </body>
 
 {% endblock %}

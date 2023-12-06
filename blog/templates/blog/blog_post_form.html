@@ -18,24 +18,9 @@
         <div class="card-body">
         <form method="POST">
             {% csrf_token %}
-            <div class="mb-3">
-                <label for="head">Заголовок</label>
-                <input type="text" name="head" class="form-control" id="head" placeholder="Введите заголовок" required>
-            </div>
-            <div class="mb-3">
-                <label for="slug">Слаг</label>
-                <input type="text" name="slug" class="form-control" id="slug" placeholder="Введите слаг" required>
-            </div>
-            <div class="mb-3">
-                <label for="content">Текст поста</label>
-                <textarea type="text" name="content" class="form-control" id="content" placeholder="Введите текст" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="preview">Превью</label>
-                <textarea type="text" name="preview" class="form-control" id="preview" placeholder="Добавьте превью" required></textarea>
-            </div>
-            <a href="{% url 'blog:route_blog_post_list' %}" class="p-2 btn btn-outline-danger">Сохранить</a>
-            {#<input type="submit" value="СОХРАНИТЬ" href="{% url 'blog:route_blog_post_view' %}">#}
+            {{ form.as_p }}
+            <button type = 'submit'>Сохранить</button>
+            <button type = 'submit'>Отмена</button>
         </form>
         </div>
     </div>

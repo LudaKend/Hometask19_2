@@ -23,7 +23,7 @@ class BlogUpdateView(UpdateView):
 
     success_url = reverse_lazy('blog:route_blog_post_list')
 
-class BlogDeleteView(DetailView):
+class BlogDeleteView(DeleteView):
     model = Blog_post
 
     success_url = reverse_lazy('blog:route_blog_post_list')

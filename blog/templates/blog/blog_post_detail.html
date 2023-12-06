@@ -16,6 +16,7 @@
 <div class="container">
     <div class="row text-center">
         <div class="card-body">
+            {#{{ form.as_p }}#}
             <div class="mb-3">
                 <label for="head">Заголовок</label>
                 <h4 class="my-0 font-weight-normal">{{ object.head }}</h4>
@@ -32,8 +33,7 @@
                 <label for="preview">Превью</label>
                 <h4 class="my-0 font-weight-normal">{{ object.preview }}</h4>
             </div>
-            <a href="{% url 'blog:route_blog_post_list' %}" class="p-2 btn btn-outline-danger">Назад</a>
-
+            <a href="{% url 'blog:route_blog_post_list' %}" class="p-2 btn btn-outline-primary">Назад</a>
         </form>
         </div>
     </div>

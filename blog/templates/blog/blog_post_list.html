@@ -35,7 +35,8 @@
                                 <img src="/media/{{ object.preview }}" height="300" alt="Превью отсутствует">
                             </div>
                         </ul>
-                        <a href="{% url 'blog:route_blog_post_edit' object.pk %}" class="p-2 btn btn-outline-danger">Изменить</a>
+                        <a href="{% url 'blog:route_blog_post_view' object.pk %}" class="p-2 btn btn-outline-primary">Посмотреть</a>
+                        <a href="{% url 'blog:route_blog_post_edit' object.pk %}" class="p-2 btn btn-outline-primary">Изменить</a>
                         <a href="{% url 'blog:route_blog_post_delete' object.pk %}" class="p-2 btn btn-outline-danger">Удалить</a>
                         </div>
                         </div>
