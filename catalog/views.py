@@ -2,8 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from catalog.models import Product
 from django.views.generic import ListView, DetailView
 
-
-# Create your views here.
 def index_home_page(requests):
     products_list = Product.objects.all()
     context = {
@@ -14,8 +12,6 @@ def index_home_page(requests):
 
 class CatalogListView(ListView):
     model = Product
-    #template_name = 'catalog/home_page.html'
-    #template_name = 'catalog/product_list.html'
 
 
 def index_contacts(requests):
@@ -41,8 +37,6 @@ def index_catalog(requests):
 
 def index_product(requests, pk):
     card_product = get_object_or_404(Product, pk=pk)
-    #card_product = Product.objects.all()
-    #print(card_product)
     context = {
         'object': card_product,
         'name_page': 'Карточка продукта'
@@ -51,6 +45,4 @@ def index_product(requests, pk):
 
 class CatalogDetailView(DetailView):
     model = Product
-    #template_name = 'catalog/product.html'
-
 

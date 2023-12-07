@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 NULLABLE = {'null': True, 'blank': True}
 
 class Blog_post(models.Model):
@@ -17,6 +16,5 @@ class Blog_post(models.Model):
         return f'{self.head}, {self.slug}, {self.is_published}, {self.views_count}'
 
     class Meta:
-        #ordering = ('name')
         verbose_name = 'Пост'  # для наименования одного объекта
         verbose_name_plural = 'Посты в блоге'  # для наименования набора объектов

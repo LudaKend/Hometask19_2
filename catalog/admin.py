@@ -1,9 +1,5 @@
 from django.contrib import admin
-
-# Register your models here.
-
 from catalog.models import Product, Category
-#admin.site.register(Product)
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

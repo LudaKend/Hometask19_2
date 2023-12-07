@@ -1,10 +1,8 @@
-
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from blog.models import Blog_post
 from django.urls import reverse_lazy, reverse
 from django.utils.text import slugify
 
-# Create your views here.
 
 class BlogCreateView(CreateView):
     model = Blog_post
@@ -24,7 +22,7 @@ class BlogListView(ListView):
     model = Blog_post
     def get_queryset(self, *args, **kwargs):
         '''метод для фильтрации постов в блоге: выводим только is_published = True'''
-        queryset = super().get_queryset(*args, **kwargs)  #наследуемся от метода get_queryset
+        queryset = super().get_queryset(*args, **kwargs)
         queryset = queryset.filter(is_published=True)
         return queryset
 
@@ -33,7 +31,7 @@ class BlogDetailView(DetailView):
 
     def get_object(self, queryset=None):
         '''метод для получения количества просмотров у статьи в блоге'''
-        self.object = super().get_object(queryset)  #наследуемся от метода get_object
+        self.object = super().get_object(queryset)
         self.object.views_count += 1
         self.object.save()
         return self.object
@@ -41,8 +39,8 @@ class BlogDetailView(DetailView):
 class BlogUpdateView(UpdateView):
     model = Blog_post
     fields = ('head', 'slug', 'content', 'preview', 'is_published',)
-    pk = 'pk'
-    #success_url = reverse_lazy('blog:route_blog_post_list')
+
+
     def get_success_url(self):
         return reverse_lazy('blog:route_blog_post_view', args=[self.kwargs.get('pk')])
 
