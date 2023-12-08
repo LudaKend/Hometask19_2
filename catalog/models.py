@@ -1,7 +1,6 @@
 from django.db import connection
 from django.db import models
 
-# Create your models here.
 NULLABLE = {'null': True, 'blank': True}
 
 class Product(models.Model):
@@ -19,9 +18,8 @@ class Product(models.Model):
         return f'{self.name}, {self.description}, {self.price}'
 
     class Meta:
-        #ordering = ('name')
-        verbose_name = 'Продукт'  # для наименования одного объекта
-        verbose_name_plural = 'Продукты'  # для наименования набора объектов
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
 
     @classmethod
     def truncate_table_restart_id(cls):
@@ -32,20 +30,18 @@ class Product(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
-    #created_at = models.CharField(max_length=10, verbose_name='Новое поле')
+
 
     def __str__(self):
         return f'{self.id}, {self.name}, {self.description}'
 
     class Meta:
-        verbose_name = 'категория'  #для наименования одного объекта
-        verbose_name_plural = 'категории' #для наименования набора объектов
-        #ordering = ('name')
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
 
 
     @classmethod
     def truncate_table_restart_id(cls):
         with connection.cursor() as cursor:
             cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table} RESTART IDENTITY CASCADE')
-
 
