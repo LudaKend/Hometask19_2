@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from catalog.models import Product
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from catalog.forms import ProductForm
+from django.urls import reverse_lazy
 
 def index_home_page(requests):
     products_list = Product.objects.all()
@@ -9,6 +11,17 @@ def index_home_page(requests):
         'name_page': 'Главная'
     }
     return render(requests, 'catalog/home_page.html', context)
+
+class CatalogCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+
+    success_url = reverse_lazy('catalog:route_product_list')
+
+class CatalogUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+
 
 class CatalogListView(ListView):
     model = Product
