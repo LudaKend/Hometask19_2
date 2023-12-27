@@ -3,6 +3,7 @@ from catalog.models import Product
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from catalog.forms import ProductForm
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 def index_home_page(requests):
     products_list = Product.objects.all()
