@@ -20,14 +20,18 @@
     <div class="row text-center">
         <div class="col-8">
             <div class="card mb-4 box-shadow" >
+                <form>
                 <div class="card-header" height="300">
 
-                    <h4 class="my-0 font-weight-normal">{{object | truncatechars:100}}</h4>
-                    <h6 class="my-0 font-weight-normal">({{ object.id }})</h6>
-                    <h6 class="my-0 font-weight-normal">({{ object.pk }})</h6>
-                    <h6 class="my-0 font-weight-normal">({{ formset }})</h6>
+                    <h4 class="my-0">{{object | truncatechars:100}}</h4>
 
+                    {% for version in object.product_in_version.all %}
+                        {% if version.is_active %}
+                            <p>Актуальная версия: {{ version.version_number }} {{ version.version_name }}<p>
+                        {% endif %}
+                    {% endfor %}
                 </div>
+                </form>
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title"></h1>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
