@@ -1,5 +1,12 @@
 from django import forms
-from catalog.models import Product
+from catalog.models import Product, Version
+
+#прикручиваю формсет#
+#from django.forms.models import inlineformset_factory
+
+#VersionFormset = inlineformset_factory(Product, Version, extra=1)
+#прикручиваю формсет#
+
 
 class ProductForm(forms.ModelForm):
 
@@ -22,3 +29,11 @@ class ProductForm(forms.ModelForm):
             if item in cleaned_data:
                 raise forms.ValidationError('Запрещенное слово в описании продукта')
         return cleaned_data
+
+
+class VersionForm(forms.ModelForm):
+
+    class Meta:
+        model = Version
+        #fields = ('is_active', )
+        fields = '__all__'

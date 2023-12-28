@@ -13,18 +13,44 @@
     </nav>
 </div>
 {% include 'catalog/include/inc_shop_name.html' %}
+
+<form method="POST">
 <div class="container">
-    <div class="row text-center">
+    <div class="col-12">
+        <div class="card-header">
+            <h3 class="card-title">Информация о продукте</h3>
+        </div>
         <div class="card-body">
-        <form method="POST">
+        <!--<form method="POST">-->
             {% csrf_token %}
             {{ form.as_p }}
             <button type = 'submit'>Сохранить</button>
             <button type = 'submit'>Отмена</button>
-        </form>
+        <!--</form>-->
         </div>
     </div>
 </div>
+<p></p>
+<div class="pricing-header px-3 py-3 pt-md-1 pb-md-4 mx-auto text-center">
+    <p class="lead">***************************************</p>
+</div>
+<div class="container">
+    <div class="col-12">
+        <div class="card-header">
+            <h3 class="card-title">Информация о версиях</h3>
+        </div>
+        <div class="card-body">
+
+            {{ formset.management_form }}
+            {% for form in formset.forms %}
+                {{ form.as_p }}
+            {% endfor %}
+            <button type = 'submit'>Сохранить версию</button>
+
+        </div>
+    </div>
+</div>
+</form>
 </body>
 
 {% endblock %}

@@ -21,8 +21,12 @@
         <div class="col-8">
             <div class="card mb-4 box-shadow" >
                 <div class="card-header" height="300">
-                    {#<h4 class="my-0 font-weight-normal">{{object | truncatechars:100}}</h4>#}
+
                     <h4 class="my-0 font-weight-normal">{{object | truncatechars:100}}</h4>
+                    <h6 class="my-0 font-weight-normal">({{ object.id }})</h6>
+                    <h6 class="my-0 font-weight-normal">({{ object.pk }})</h6>
+                    <h6 class="my-0 font-weight-normal">({{ formset }})</h6>
+
                 </div>
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title"></h1>
@@ -37,6 +41,7 @@
                     <!--<a class="p-2 btn btn-outline-primary" href="/catalog/">Купить</a>-->
                     {#<a href="{% url 'catalog:route_catalog' %}" class="p-2 btn btn-outline-primary">Купить</a>#}
                     <a href="{% url 'catalog:route_product' object.pk %}" class="p-2 btn btn-outline-danger">Купить</a>
+                    <a href="{% url 'catalog:route_update_product' object.pk %}" class="p-2 btn btn-outline-danger">Изменить</a>
                 </div>
             </div>
         </div>
