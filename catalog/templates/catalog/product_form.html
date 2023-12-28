@@ -16,7 +16,7 @@
 
 <form method="POST">
 <div class="container">
-    <div class="col-12">
+    <div class="col-6">
         <div class="card-header">
             <h3 class="card-title">Информация о продукте</h3>
         </div>
@@ -35,7 +35,7 @@
     <p class="lead">***************************************</p>
 </div>
 <div class="container">
-    <div class="col-12">
+    <div class="col-6">
         <div class="card-header">
             <h3 class="card-title">Информация о версиях</h3>
         </div>
@@ -44,6 +44,10 @@
             {{ formset.management_form }}
             {% for form in formset.forms %}
                 {{ form.as_p }}
+                <p></p>
+                {{ form.field.help_text }}
+
+
             {% endfor %}
             <button type = 'submit'>Сохранить версию</button>
 

@@ -46,9 +46,10 @@ class Category(models.Model):
             cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table} RESTART IDENTITY CASCADE')
 
 class Version(models.Model):
-    product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='Продукт', related_name='product_in_version')
-    version_number = models.CharField(max_length=100, verbose_name='Номер версии')
-    version_name = models.TextField(verbose_name='Название версии', **NULLABLE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='Продукт',
+                                related_name='product_in_version')
+    version_number = models.CharField(max_length=100, verbose_name='Номер версии', help_text='Образец заполнения: 1/2023')
+    version_name = models.TextField(verbose_name='Название версии', **NULLABLE, help_text='Образец заполнения: поступление 1.12.2023')
     is_active = models.BooleanField(verbose_name='активная версия', default=False)
 
     def __str__(self):
