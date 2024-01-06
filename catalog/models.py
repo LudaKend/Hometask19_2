@@ -1,8 +1,7 @@
 from django.db import connection
 from django.db import models
 
-# Create your models here.
-NULLABLE = {'null':True, 'blank':True}
+NULLABLE = {'null': True, 'blank': True}
 
 class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
@@ -19,9 +18,8 @@ class Product(models.Model):
         return f'{self.name}, {self.description}, {self.price}'
 
     class Meta:
-        #ordering = ('name')
-        verbose_name = 'Продукт'  # для наименования одного объекта
-        verbose_name_plural = 'Продукты'  # для наименования набора объектов
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
 
     @classmethod
     def truncate_table_restart_id(cls):
@@ -32,18 +30,32 @@ class Product(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
-    #created_at = models.CharField(max_length=10, verbose_name='Новое поле')
+
 
     def __str__(self):
         return f'{self.id}, {self.name}, {self.description}'
 
     class Meta:
-        verbose_name = 'категория'  #для наименования одного объекта
-        verbose_name_plural = 'категории' #для наименования набора объектов
-        #ordering = ('name')
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
 
 
     @classmethod
     def truncate_table_restart_id(cls):
         with connection.cursor() as cursor:
             cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table} RESTART IDENTITY CASCADE')
+
+class Version(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='Продукт',
+                                related_name='product_in_version')
+    version_number = models.CharField(max_length=100, verbose_name='Номер версии', help_text='Образец заполнения: 1/2023')
+    version_name = models.TextField(verbose_name='Название версии', **NULLABLE, help_text='Образец заполнения: поступление 1.12.2023')
+    is_active = models.BooleanField(verbose_name='активная версия', default=False)
+
+    def __str__(self):
+        '''строковое отображение обьекта'''
+        return f'{self.product}, {self.version_number}, {self.is_active}'
+
+    class Meta:
+        verbose_name = 'Версия'
+        verbose_name_plural = 'Версии'

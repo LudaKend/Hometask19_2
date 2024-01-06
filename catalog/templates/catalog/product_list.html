@@ -1,0 +1,66 @@
+{% extends 'catalog/base.html' %}
+{% load templatetags %}
+{% block content %}
+<body>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Интернет-магазин </h5>
+    <nav class="ms-5">
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_home_page' %}">Главная</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_contacts' %}">Контакты</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'blog:route_blog_post_list' %}">Блог</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_create_product' %}">Добавить новый продукт</a>
+    </nav>
+</div>
+
+{% include 'catalog/include/inc_shop_name.html' %}
+
+<div class="container">
+    {% for object in object_list %}
+    <div class="row text-center">
+        <div class="col-6">
+            <div class="card mb-4 box-shadow" >
+                <form>
+                <div class="card-header" height="300">
+
+                    <h4 class="my-0">{{object | truncatechars:100}}</h4>
+
+                    {% for version in object.product_in_version.all %}
+                        {% if version.is_active %}
+                            <p>Актуальная версия: {{ version.version_number }} {{ version.version_name }}<p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                </form>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"></h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <img src="/media/{{ object.product_image }}" height="300" alt="Фото товара отсутствует">
+                            {#<img src="{{ object.product_image|full_path }}" height="300" />#}
+                            {#<img src="{% full_path object.product_image %}" height="300" />#}
+                        </div>
+                    </ul>
+                    <!--<button type="button" class="btn btn-lg btn-block btn-outline-primary" href="/contacts/">Купить</button>-->
+                    <!--<a class="p-2 btn btn-outline-primary" href="/catalog/">Купить</a>-->
+                    {#<a href="{% url 'catalog:route_catalog' %}" class="p-2 btn btn-outline-primary">Купить</a>#}
+                    <a href="{% url 'catalog:route_product' object.pk %}" class="p-2 btn btn-outline-danger">Купить</a>
+                    <a href="{% url 'catalog:route_update_product' object.pk %}" class="p-2 btn btn-outline-danger">Изменить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+<nav class="list-pages">
+    <ul>
+        {% for p in page_obj.paginator.page_range %}
+        <li>
+            <a href="?page={{ p }}">{{ p }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+</body>
+{% endblock %}
