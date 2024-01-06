@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from catalog.forms import ProductForm, VersionForm
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 def index_home_page(requests):
     products_list = Product.objects.all()
@@ -43,8 +44,8 @@ class CatalogUpdateView(UpdateView):
             formset.instance = self.object
             formset.save()
         return super().form_valid(form)
-
 #прикручиваю формсет#
+
     def get_success_url(self):
         return reverse_lazy('catalog:route_product', args=[self.kwargs.get('pk')])
 
@@ -52,6 +53,7 @@ class CatalogUpdateView(UpdateView):
 class CatalogListView(ListView):
     model = Product
 
+    paginate_by = 4
 
 def index_contacts(requests):
     context = {
