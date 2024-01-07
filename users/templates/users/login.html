@@ -1,0 +1,40 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Интернет-магазин </h5>
+    <nav class="ms-5">
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_home_page' %}">Главная</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_product_list' %}">Каталог</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'blog:route_blog_post_list' %}">Блог</a>
+    </nav>
+</div>
+{% include 'catalog/include/inc_shop_name.html' %}
+<div class="container">
+    <div class="row text-start">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Авторизация</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name">Адрес электронной почты</label>
+                            <input type="text" name="name" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone">Пароль</label>
+                            <input type="text" name="phone" class="form-control" id="phone" required>
+                        </div>
+
+                    <input type="submit" value="ВОЙТИ">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

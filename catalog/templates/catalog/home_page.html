@@ -13,6 +13,14 @@
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_contacts' %}">Контакты</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'blog:route_blog_post_list' %}">Блог</a>
     </nav>
+    <nav class="ms-5 px-md-4">
+        {% if user.is_authenticated %}
+        <a class="p-2 btn btn-outline-success" href="{% url 'users:route_logout_users' %}">Выйти</a>
+        {% else %}
+        <a class="p-2 btn btn-outline-success" href="{% url 'users:route_login_users' %}">Войти</a>
+        {% endif %}
+        <a class="p-2 btn btn-outline-success" href="{% url 'blog:route_blog_post_list' %}">Регистрация</a>
+    </nav>
 </div>
 
 {% include 'catalog/include/inc_shop_name.html' %}
