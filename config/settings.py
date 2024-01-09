@@ -144,3 +144,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+#для вывода в консоль
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = 'smpt.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = '663610kosmo85@mail.ru'
+EMAIL_HOST_PASSWORD = 'ezErear8qdRX94ej2t5e'
+EMAIL_USE_TSL = True
+EMAIL_USE_SSL = False
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
