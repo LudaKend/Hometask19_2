@@ -1,5 +1,6 @@
 from django.db import connection
 from django.db import models
+from users.models import User
 
 NULLABLE = {'null': True, 'blank': True}
 
@@ -12,6 +13,8 @@ class Product(models.Model):
     price = models.FloatField(verbose_name='Цена', default=0)
     data_create = models.DateField(verbose_name='дата создания', auto_now_add=True)
     data_change = models.DateField(verbose_name='дата изменения', auto_now=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='почта создателя продукта ', **NULLABLE)
+
 
     def __str__(self):
         '''строковое отображение обьекта'''

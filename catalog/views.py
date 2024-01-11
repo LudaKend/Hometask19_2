@@ -6,6 +6,7 @@ from catalog.forms import ProductForm, VersionForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index_home_page(requests):
     products_list = Product.objects.all()
@@ -21,6 +22,15 @@ class CatalogCreateView(CreateView):
 
     success_url = reverse_lazy('catalog:route_product_list')
 
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        user = self.get_object()   #беру текущего юзера, который залогинился
+        self.object = form.save()  #сначала нужно сохранить
+        self.object.author = user  #записываю текущего пользователя в качестве автора
+        self.object = form.save()  #измененные данные сохраняю
+        return super().form_valid(form)
 
 class CatalogUpdateView(UpdateView):
     model = Product
@@ -50,10 +60,11 @@ class CatalogUpdateView(UpdateView):
         return reverse_lazy('catalog:route_product', args=[self.kwargs.get('pk')])
 
 
-class CatalogListView(ListView):
+class CatalogListView(LoginRequiredMixin, ListView):
     model = Product
 
     paginate_by = 4
+
 
 def index_contacts(requests):
     context = {
