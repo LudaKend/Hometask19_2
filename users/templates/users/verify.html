@@ -15,21 +15,22 @@
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">Авторизация</h4>
+                    <h4 class="my-0 font-weight-normal">Верификация</h4>
                 </div>
                 <div class="card-body">
                     <form method="POST">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <!--{% if user.is_active == False %}
                         <div class="mb-3">
-                            <label for="verification_key">Ключ</label>
-                            <input type="text" name="verification_key" class="form-control" id="verification_key" placeholder="Ключ подтвеждения" required>
+                            <label for="email">Почта</label>
+                            <input type="text" name="email" class="form-control" id="email" placeholder="Ваш email" required>
                         </div>
-                        {% endif %}-->
-                    <input type="submit" value="ВОЙТИ">
-                    <a class="p-2 btn btn-outline-danger" href="{% url 'users:route_reset_password' %}">Забыли пароль?</a>
+                        <div class="mb-3">
+                            <label for="verification_key">Введите код подтверждения</label>
+                            <input type="text" name="verification_key" class="form-control" id="verification_key" placeholder="Код подтверждения" required>
+                        </div>
+                    <input type="submit" value="Отправить">
                     </form>
+                    <!--<p>{{message}}</p>-->
                 </div>
             </div>
         </div>
