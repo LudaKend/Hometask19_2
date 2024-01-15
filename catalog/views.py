@@ -17,9 +17,10 @@ def index_home_page(requests):
     return render(requests, 'catalog/home_page.html', context)
 
 class CatalogCreateView(CreateView):
+    '''класс-контроллер для создания Карточки продукта,работающий с шаблоном product_form.html'''
     model = Product
     form_class = ProductForm
-
+    extra_context = {'name_page': 'Создание Карточки продукта'}
     success_url = reverse_lazy('catalog:route_product_list')
 
     def get_object(self, queryset=None):
@@ -33,8 +34,11 @@ class CatalogCreateView(CreateView):
         return super().form_valid(form)
 
 class CatalogUpdateView(UpdateView):
+    '''класс-контроллер для внесения изменений в Карточку продукта,работающий с шаблоном product_form.html'''
     model = Product
     form_class = ProductForm
+
+    extra_context = {'name_page': 'Изменение Карточки продукта'}
 
 #прикручиваю формсет#
     def get_context_data(self, **kwargs):
@@ -61,12 +65,15 @@ class CatalogUpdateView(UpdateView):
 
 
 class CatalogListView(LoginRequiredMixin, ListView):
+    '''класс-контроллер,работающий с шаблоном product_list.html'''
     model = Product
+    extra_context = {'name_page': 'Каталог продуктов'}
 
     paginate_by = 4
 
 
 def index_contacts(requests):
+    '''функция-контроллер для страницы контактов'''
     context = {
         'name_page': 'Контакты'
     }
@@ -79,22 +86,28 @@ def index_contacts(requests):
         print(f"Имя: {name}\nНомер телефона: {phone}\nСообщение:{message}")
     return render(requests, 'catalog/contacts.html', context)
 
-def index_catalog(requests):
-    products_list = Product.objects.all()
-    context = {
-        'objects_list': products_list,
-        'name_page': 'Каталог'
-    }
-    return render(requests, 'catalog/catalog.html', context)
+# def index_catalog(requests):
+#     '''функция-контроллер для страницы Каталог(catalog.html),
+#     заменена на класс-контроллер CatalogListView,работающий с шаблоном product_list.html'''
+#     products_list = Product.objects.all()
+#     context = {
+#         'objects_list': products_list,
+#         'name_page': 'Каталог'
+#     }
+#     return render(requests, 'catalog/catalog.html', context)
 
-def index_product(requests, pk):
-    card_product = get_object_or_404(Product, pk=pk)
-    context = {
-        'object': card_product,
-        'name_page': 'Карточка продукта'
-    }
-    return render(requests, 'catalog/product.html', context)
+# def index_product(requests, pk):
+#     '''функция-контроллер для страницы Карточка продукта(product.html),
+#     заменена на класс-контроллер CatalogDetailView,работающий с шаблоном product_detail.html'''
+#     card_product = get_object_or_404(Product, pk=pk)
+#     context = {
+#         'object': card_product,
+#         'name_page': 'Карточка продукта'
+#     }
+#     return render(requests, 'catalog/product.html', context)
 
 class CatalogDetailView(DetailView):
+    '''класс-контроллер для страницы Карточка продукта,работающий с шаблоном product_detail.html'''
     model = Product
+    extra_context = {'name_page': 'Карточка продукта'}
 

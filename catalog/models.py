@@ -14,7 +14,7 @@ class Product(models.Model):
     data_create = models.DateField(verbose_name='дата создания', auto_now_add=True)
     data_change = models.DateField(verbose_name='дата изменения', auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='почта создателя продукта ', **NULLABLE)
-
+    is_published = models.BooleanField(verbose_name='опубликован', default=False)
 
     def __str__(self):
         '''строковое отображение обьекта'''
@@ -23,6 +23,9 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+        permissions = [('reset_is_published', 'отмена публикации продукта'),
+                       ('change_category', 'изменение категории у продукта'),
+                       ('change_description', 'изменение описания продукта')]
 
     @classmethod
     def truncate_table_restart_id(cls):

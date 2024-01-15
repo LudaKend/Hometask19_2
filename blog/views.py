@@ -5,6 +5,7 @@ from django.utils.text import slugify
 
 
 class BlogCreateView(CreateView):
+    '''класс-контроллер,работающий с шаблоном blog_post_form.html'''
     model = Blog_post
     fields = ('head', 'slug', 'content', 'preview',)
 
@@ -19,6 +20,7 @@ class BlogCreateView(CreateView):
 
 
 class BlogListView(ListView):
+    '''класс-контроллер,работающий с шаблоном blog_post_list.html'''
     model = Blog_post
     def get_queryset(self, *args, **kwargs):
         '''метод для фильтрации постов в блоге: выводим только is_published = True'''
@@ -27,6 +29,7 @@ class BlogListView(ListView):
         return queryset
 
 class BlogDetailView(DetailView):
+    '''класс-контроллер,работающий с шаблоном blog_post_detail.html'''
     model = Blog_post
 
     def get_object(self, queryset=None):
@@ -37,6 +40,7 @@ class BlogDetailView(DetailView):
         return self.object
 
 class BlogUpdateView(UpdateView):
+    '''класс-контроллер,работающий с шаблоном blog_post_form.html'''
     model = Blog_post
     fields = ('head', 'slug', 'content', 'preview', 'is_published',)
 
@@ -45,6 +49,7 @@ class BlogUpdateView(UpdateView):
         return reverse_lazy('blog:route_blog_post_view', args=[self.kwargs.get('pk')])
 
 class BlogDeleteView(DeleteView):
+    '''класс-контроллер,работающий с шаблоном blog_post_confirm_delete.html'''
     model = Blog_post
 
     success_url = reverse_lazy('blog:route_blog_post_list')

@@ -15,9 +15,9 @@
     </nav>
     <nav class="ms-5 px-md-4">
         {% if user.is_authenticated %}
-        <a class="p-2 btn btn-outline-success" href="{% url 'users:route_logout_users' %}">Выйти</a>
+        <a class="p-2 btn btn-outline-success float-right" href="{% url 'users:route_logout_users' %}">Выйти</a>
         {% else %}
-        <a class="p-2 btn btn-outline-success" href="{% url 'users:route_login_users' %}">Войти</a>
+        <a class="p-2 btn btn-outline-success float-right" href="{% url 'users:route_login_users' %}">Войти</a>
         {% endif %}
         <a class="p-2 btn btn-outline-success" href="{% url 'users:route_register_users' %}">Регистрация</a>
     </nav>
