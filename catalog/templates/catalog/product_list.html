@@ -9,7 +9,9 @@
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_home_page' %}">Главная</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_contacts' %}">Контакты</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'blog:route_blog_post_list' %}">Блог</a>
+        {% if perms.catalog.add_product %}
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_create_product' %}">Добавить новый продукт</a>
+        {% endif %}
     </nav>
 </div>
 

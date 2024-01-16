@@ -6,7 +6,8 @@ from catalog.forms import ProductForm, VersionForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core.paginator import Paginator
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.http import Http404
 
 def index_home_page(requests):
     products_list = Product.objects.all()
@@ -16,11 +17,13 @@ def index_home_page(requests):
     }
     return render(requests, 'catalog/home_page.html', context)
 
-class CatalogCreateView(CreateView):
+class CatalogCreateView(PermissionRequiredMixin, CreateView):
     '''класс-контроллер для создания Карточки продукта,работающий с шаблоном product_form.html'''
     model = Product
     form_class = ProductForm
     extra_context = {'name_page': 'Создание Карточки продукта'}
+    permission_required = 'catalog.add_product'
+
     success_url = reverse_lazy('catalog:route_product_list')
 
     def get_object(self, queryset=None):
@@ -33,12 +36,31 @@ class CatalogCreateView(CreateView):
         self.object = form.save()  #измененные данные сохраняю
         return super().form_valid(form)
 
-class CatalogUpdateView(UpdateView):
+class CatalogUpdateView(PermissionRequiredMixin,UpdateView):
     '''класс-контроллер для внесения изменений в Карточку продукта,работающий с шаблоном product_form.html'''
     model = Product
     form_class = ProductForm
-
     extra_context = {'name_page': 'Изменение Карточки продукта'}
+
+    permission_required = 'catalog.change_product' #['reset_is_published', 'change_category', 'change_description']
+
+
+    # def get_permission_required(self):
+    #     '''метод для получения атрибута permission_required в зависимости от группы полномочий, присвоенной пользователю'''
+    #     print(self.object.groups)
+    #     if self.object.groups == 3 and self.object.author == self.user.email:
+    #         #для пользователей с группой полномочий suppliers(поставщики),изменять позволено только автору
+    #         self.permission_required = 'catalog.change_product'
+    #     elif self.object.groups == 3:
+    #         #для пользователей с группой полномочий moderators(модераторы),изменять можно только 3 поля
+    #         self.permission_required = ['reset_is_published', 'change_category', 'change_description']
+    #     return self.permission_required
+    def get_object(self, queryset=None):
+        '''изменять продукт можно только автору'''
+        self.object = super().get_object(queryset)
+        if self.object.author != self.request.user:
+            raise Http404
+        return self.object
 
 #прикручиваю формсет#
     def get_context_data(self, **kwargs):
