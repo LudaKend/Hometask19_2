@@ -13,6 +13,7 @@ import smtplib
 from django.conf import settings
 from django.contrib.auth.views import PasswordResetView
 from django.contrib import messages
+from django.contrib.auth.models import Group
 
 class RegisterView(CreateView):
     '''контроллер для регистрации пользователя'''
@@ -38,6 +39,9 @@ class RegisterView(CreateView):
         self.object.verification_key = verification_key
         self.object.is_active = False
         self.object = form.save()
+        #нужно при регистрации пользователю присвоить группу пономочий simple_users (обыкновенные пользователи)
+        self.object.groups.add(2) #в таблице users_user_group есть только id, поэтому так
+
         return super().form_valid(form)
 
 

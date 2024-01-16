@@ -8,7 +8,9 @@
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_home_page' %}">Главная</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_product_list' %}">Каталог</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:route_contacts' %}">Контакты</a>
-        <a class="p-2 btn btn-outline-primary" href="{% url 'blog:route_blog_post_form' %}">Создать  новый пост</a>
+        {% if perms.blog.add_blog_post %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'blog:route_blog_post_form' %}">Создать  новый пост</a>
+        {% endif %}
     </nav>
 </div>
 
@@ -41,8 +43,12 @@
                             </div>
                         </ul>
                         <a href="{% url 'blog:route_blog_post_view' object.pk %}" class="p-2 btn btn-outline-primary">Посмотреть</a>
+                        {% if perms.blog.change_blog_post %}
                         <a href="{% url 'blog:route_blog_post_edit' object.pk %}" class="p-2 btn btn-outline-primary">Изменить</a>
-                        <a href="{% url 'blog:route_blog_post_delete' object.pk %}" class="p-2 btn btn-outline-danger">Удалить</a>
+                        {% endif %}
+                        {% if perms.blog.delete_blog_post %}
+                            <a href="{% url 'blog:route_blog_post_delete' object.pk %}" class="p-2 btn btn-outline-danger">Удалить</a>
+                        {% endif %}
                         </div>
                         </div>
                     </div>

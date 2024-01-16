@@ -2,12 +2,13 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 from blog.models import Blog_post
 from django.urls import reverse_lazy, reverse
 from django.utils.text import slugify
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
-
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
     '''класс-контроллер,работающий с шаблоном blog_post_form.html'''
     model = Blog_post
     fields = ('head', 'slug', 'content', 'preview',)
+    permission_required = 'blog.add_blog_post'
 
     success_url = reverse_lazy('blog:route_blog_post_list')
     def form_valid(self, form):
@@ -39,18 +40,18 @@ class BlogDetailView(DetailView):
         self.object.save()
         return self.object
 
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(LoginRequiredMixin,PermissionRequiredMixin, UpdateView):
     '''класс-контроллер,работающий с шаблоном blog_post_form.html'''
     model = Blog_post
     fields = ('head', 'slug', 'content', 'preview', 'is_published',)
-
+    permission_required = 'blog.change_blog_post'
 
     def get_success_url(self):
         return reverse_lazy('blog:route_blog_post_view', args=[self.kwargs.get('pk')])
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     '''класс-контроллер,работающий с шаблоном blog_post_confirm_delete.html'''
     model = Blog_post
-
+    permission_required = 'blog.delete_blog_post'
     success_url = reverse_lazy('blog:route_blog_post_list')
 
