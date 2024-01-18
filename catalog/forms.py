@@ -1,11 +1,7 @@
 from django import forms
 from catalog.models import Product, Version
 
-#прикручиваю формсет#
-#from django.forms.models import inlineformset_factory
 
-#VersionFormset = inlineformset_factory(Product, Version, extra=1)
-#прикручиваю формсет#
 
 
 class ProductForm(forms.ModelForm):
@@ -51,3 +47,4 @@ class VersionForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control'
            # field.help_text = 'Some help text for field'
             #field.help_text = 'Например,'
+

@@ -20,20 +20,39 @@
         <div class="card-header">
             <h3 class="card-title">Информация о продукте</h3>
         </div>
+        {% csrf_token %}
+        {% if perms.catalog.reset_is_published %}
         <div class="card-body">
-        <!--<form method="POST">-->
-            {% csrf_token %}
-            {{ form.as_p }}
+            <label for="description">Описание</label>
+            <textarea type="text" name="description" class="form-control" id="description"
+                          required>{{ object.description }}</textarea>
+            <label for="category">Категория</label>
+            <textarea type="text" name="category" class="form-control" id="category"
+                          required>{{ object.category }}</textarea>
+            <label for="category">опубликован</label>
+            <textarea type="text" name="is_published" class="form-control" id="is_published"
+                          required>{{ object.is_published }}</textarea>
+            <p></p>
+            <input type="submit" value="ОТПРАВИТЬ">
             <button type = 'submit'>Сохранить</button>
             <button type = 'submit'>Отмена</button>
-        <!--</form>-->
         </div>
+        {% else %}
+        <div class="card-body">
+            {{ form.as_p }}
+        </div>
+
+        <button type = 'submit'>Сохранить</button>
+        <button type = 'submit'>Отмена</button>
+
     </div>
 </div>
 <p></p>
+
 <div class="pricing-header px-3 py-3 pt-md-1 pb-md-4 mx-auto text-center">
     <p class="lead">***************************************</p>
 </div>
+
 <div class="container">
     <div class="col-6">
         <div class="card-header">
@@ -46,14 +65,13 @@
                 {{ form.as_p }}
                 <p></p>
                 {{ form.field.help_text }}
-
-
             {% endfor %}
             <button type = 'submit'>Сохранить версию</button>
 
         </div>
     </div>
 </div>
+    {% endif %}
 </form>
 </body>
 

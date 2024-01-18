@@ -3,11 +3,12 @@ from django.shortcuts import render, get_object_or_404
 from catalog.models import Product, Version
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from catalog.forms import ProductForm, VersionForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import Http404
+from users.models import User
 
 def index_home_page(requests):
     products_list = Product.objects.all()
@@ -44,7 +45,6 @@ class CatalogUpdateView(PermissionRequiredMixin,UpdateView):
 
     permission_required = 'catalog.change_product' #['reset_is_published', 'change_category', 'change_description']
 
-
     # def get_permission_required(self):
     #     '''метод для получения атрибута permission_required в зависимости от группы полномочий, присвоенной пользователю'''
     #     print(self.object.groups)
@@ -55,12 +55,31 @@ class CatalogUpdateView(PermissionRequiredMixin,UpdateView):
     #         #для пользователей с группой полномочий moderators(модераторы),изменять можно только 3 поля
     #         self.permission_required = ['reset_is_published', 'change_category', 'change_description']
     #     return self.permission_required
+
+
     def get_object(self, queryset=None):
         '''изменять продукт можно только автору'''
         self.object = super().get_object(queryset)
-        if self.object.author != self.request.user:
-            raise Http404
+        print(self.object)  #для отладки
+        #сначала надо проверить, если пользователь является модератором, то ему можно изменить 3 поля
+        user = self.request.user  # беру текущего юзера, который залогинился
+        print(user) #для отладки
+        #temp_user_id = self.request.user.id
+        #print(temp_user_id)  #для отладки
+        #group_id = self.request.user.groups.filter(user_id=temp_user_id)
+        #print(group_id)
+        is_moderator = user.groups.filter(name='moderators').exists()
+        print(is_moderator) #для отладки
+        #if user.has_perm('catalog.reset_is_published_product'):
+        print(user.has_perm('catalog.reset_is_published'))
+        if is_moderator:
+            print('К изменению доступны только 3 поля')
+            #return reverse_lazy('catalog:route_home_page') #- не работает
+        else:
+            if self.object.author != self.request.user:
+                raise Http404('Изменения доступны только поставщику товара')
         return self.object
+
 
 #прикручиваю формсет#
     def get_context_data(self, **kwargs):

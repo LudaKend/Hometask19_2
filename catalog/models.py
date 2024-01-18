@@ -26,6 +26,7 @@ class Product(models.Model):
         permissions = [('reset_is_published', 'отмена публикации продукта'),
                        ('change_category', 'изменение категории у продукта'),
                        ('change_description', 'изменение описания продукта')]
+        ordering = ['-data_create']
 
     @classmethod
     def truncate_table_restart_id(cls):
