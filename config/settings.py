@@ -149,6 +149,7 @@ LOGOUT_REDIRECT_URL = '/'
 #для вывода в консоль
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+#для почтовых отправлений
 EMAIL_HOST = 'smpt.mail.ru'
 EMAIL_PORT = 2525
 EMAIL_HOST_USER = '663610kosmo85@mail.ru'
@@ -157,3 +158,11 @@ EMAIL_USE_TSL = True
 EMAIL_USE_SSL = False
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#для подключения нереляционной БД Redis для хранения кэша
+CASHES = {
+    'default': {
+        "BACKEND": "django.core.cache.backends.redis.redisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
