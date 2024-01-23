@@ -25,6 +25,13 @@
 
 {% include 'catalog/include/inc_shop_name.html' %}
 
+<div class="container">
+    {% for object in objects_list %}
+    <div class="card-body">
+        <h1 class="card-title">{{ object.name }}</h1>
+    </div>
+    {% endfor %}
+</div>
 <!--<div class="container">
     {% for object in objects_list %}
     <div class="row text-center">

@@ -4,16 +4,21 @@ from catalog.models import Product, Version
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from catalog.forms import ProductForm, VersionForm
 from django.urls import reverse_lazy, reverse
-from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import Http404
-from users.models import User
+from utils import get_category_from_cache
+
 
 def index_home_page(requests):
-    products_list = Product.objects.all()
+    # products_list = Product.objects.all()
+    # context = {
+    #     'objects_list': products_list,
+    #     'name_page': 'Главная'
+    # }
+    categories_list = get_category_from_cache()
     context = {
-        'objects_list': products_list,
+        'objects_list': categories_list,
         'name_page': 'Главная'
     }
     return render(requests, 'catalog/home_page.html', context)

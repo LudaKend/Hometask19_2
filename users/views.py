@@ -85,6 +85,7 @@ class UserLoginView(LoginView):
 
 def index_verify(requests):
     '''контроллер для ввода ключа подтверждения'''
+    #success_url = reverse_lazy('route_login_users') #здесь нужно перенаправить, но какой параметр использовать?..
     if requests.method == 'POST':
         email = requests.POST.get('email') #получить значение поля Почта c экрана
         verify = requests.POST.get('verification_key') #получить значение Ключа с экрана
@@ -97,11 +98,12 @@ def index_verify(requests):
                 user.is_active = True
                 user.save()
                 print('пользователь успешно активирован, можно переходить к авторизации')
-        # temp_user = User.objects.filter(email=email)
-        # if email == temp_user.email and verify == temp_user.verification_key:
-        #     temp_user.is_active = True
-        #     temp_user.save()
-        #     print('пользователь успешно активирован, можно переходить к авторизации')
+                #перенаправляю на страницу входа login.html
+                #return redirect('users/login/route_login_users')
+
+                return redirect('redirect-success/')
+                #return redirect('route_login_users') - ошибка!
+
     return render(requests, 'users/verify.html') #это страница на которой работает этот контроллер
 
 
