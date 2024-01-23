@@ -13,11 +13,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 
 import os
+from dotenv import load_dotenv
+
 PASSWORD = os.getenv('FOR_POSTGRES')   #для доступа к БД Postgresql нужен пароль
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -153,18 +157,18 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smpt.mail.ru'
 EMAIL_PORT = 2525
 EMAIL_HOST_USER = '663610kosmo85@mail.ru'
-EMAIL_HOST_PASSWORD = 'ezErear8qdRX94ej2t5e'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TSL = True
 EMAIL_USE_SSL = False
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 #для подключения нереляционной БД Redis для хранения кэша
-CACHE_ENABLED = True
+CACHE_ENABLED = os.getenv('CACHE_ENABLED')
 if CACHE_ENABLED:
     CASHES = {
         'default': {
         "BACKEND": "django.core.cache.backends.redis.redisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
+        "LOCATION": os.getenv('CACHE_LOCATION'),
         }
     }
